@@ -1,26 +1,18 @@
-uniform sampler2D uDisplacementMap;
+// vertexShader.glsl
+uniform sampler2D uDisplacementMap; // This will be our dynamic trailMap
 uniform float uDisplacementScale;
-uniform vec2 uMouse;
-uniform vec2 uResolution;
-uniform float uTime;
 
 varying vec2 vUv;
 
 void main() {
     vUv = uv;
 
-    vec2 aspect = vec2(uResolution.x / uResolution.y, 1.0);
-
-    // Diff between UV and mouse in aspect-corrected space
-    vec2 diff = (vUv - uMouse) * aspect;
-
-    float dist = length(diff);
-    float mask = smoothstep(0.075, 0.0, dist);
-
+    // The displacement value is read directly from our generated trail texture.
+    // This texture already contains the displacement data from your original map,
+    // revealed by the mouse, with a fading trail.
     float displacement = texture2D(uDisplacementMap, vUv).r;
 
-    vec3 displacedPosition = position + normal * displacement * uDisplacementScale * mask; // Adjust the multiplier for more or less displacement
+    vec3 displacedPosition = position + normal * displacement * uDisplacementScale;
 
     csm_Position = displacedPosition;
-    csm_Normal = normal;
 }
