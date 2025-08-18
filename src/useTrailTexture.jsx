@@ -15,14 +15,15 @@ import trailFragmentShader from "./shaders/trailFragmentShader.glsl";
 import trailVertexShader from "./shaders/trailVertexShader.glsl";
 
 export function useTrailTexture({ displacementMap, fade = 0.95 }) {
-  const { gl, size } = useThree();
+  const { gl } = useThree();
   const scene = useMemo(() => new Scene(), []);
   const camera = useMemo(() => new OrthographicCamera(-1, 1, 1, -1, 0, 1), []);
 
   // Use a resolution that matches the canvas size for accuracy
   const resolution = useMemo(
-    () => new Vector2(size.width, size.height),
-    [size],
+    () =>
+      new Vector2(displacementMap.image.width, displacementMap.image.height),
+    [displacementMap.image.width, displacementMap.image.height],
   );
 
   // Create two render targets to ping-pong between
