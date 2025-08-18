@@ -1,13 +1,20 @@
 uniform sampler2D uDisplacementMap;
 uniform float uDisplacementScale;
 uniform vec2 uMouse;
+uniform vec2 uResolution;
+uniform float uTime;
 
 varying vec2 vUv;
 
 void main() {
     vUv = uv;
 
-    float dist = distance(vUv, uMouse);
+    vec2 aspect = vec2(uResolution.x / uResolution.y, 1.0);
+
+    // Diff between UV and mouse in aspect-corrected space
+    vec2 diff = (vUv - uMouse) * aspect;
+
+    float dist = length(diff);
     float mask = smoothstep(0.075, 0.0, dist);
 
     float displacement = texture2D(uDisplacementMap, vUv).r;
