@@ -47,7 +47,7 @@ export function BackgroundPlane({ displacementMap, aoMap }) {
         trigger: document.documentElement,
         start: "top top",
         end: "bottom bottom",
-        scrub: true,
+        scrub: 1,
       },
     });
   }, [planeDimensions, viewport]);
