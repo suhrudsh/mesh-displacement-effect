@@ -112,7 +112,7 @@ export function BackgroundPlane({ displacementMap, aoMap }) {
                   displacementMap.image.height,
                 ),
               },
-              // ... other uniforms
+              uAOIntensity: { value: 5.0 },
             }}
           />
         </mesh>

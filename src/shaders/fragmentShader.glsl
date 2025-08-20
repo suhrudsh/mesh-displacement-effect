@@ -15,5 +15,5 @@ void main() {
 
     float trailMask = texture2D(uDisplacementMap, vUv).r;
 
-    csm_AO = mix(1.0, ao, trailMask * uAOIntensity);
+    csm_AO = mix(1.0, ao, trailMask * -uAOIntensity);
 }
