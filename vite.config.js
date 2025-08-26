@@ -6,5 +6,5 @@ import glsl from "vite-plugin-glsl";
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss(), glsl()],
-  base: "/mesh-displacement-effect/",
+  base: "/threejs-mesh-displacement-effect/",
 });
